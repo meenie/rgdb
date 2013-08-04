@@ -1,0 +1,22 @@
+<div class="row gif-add">
+    <div class="col-push-2 col-sm-8">
+        <form name="addGif" ng-submit="Ctrl.addGif()" novalidate>
+            <fieldset>
+                <legend>Add New GIF</legend>
+                <div class="form-group" ng-class="{'has-error': addGif.url.$error.url || addGif.url.$error.endsIn || ! Ctrl.fileExists}">
+                    <label for="inputUrl" class="control-label">URL</label>
+                    <input type="text" name="url" ng-model="gif.url" class="form-control" id="inputUrl" placeholder="URL" ends-in=".gif" required>
+                    <span class="help-block" ng-show="addGif.url.$error.url || addGif.url.$error.endsIn">Must be a valid URL with a .gif extension</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': addGif.keywords.$error.keywordsRequired}">
+                    <label for="inputKeywords" class="control-label">Keywords</label>
+                    <input type="text" name="keywords" ng-model="gif.keywordsText" class="form-control" id="inputKeywords"
+                           placeholder="Keywords" required keywords-required="3">
+                    <span class="help-block">Separate each keyword with a comma (,).</span>
+                    <span class="help-block" ng-show="addGif.keywords.$error.keywordsRequired">You must submit at least 3 keywords.</span>
+                </div>
+                <button type="submit" class="btn btn-default" ng-disabled="addGif.$invalid">Add GIF</button>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="rgdb" ng-controller="AppCtrl as AppCtrl" ng-csp>
+<head>
+    <title>RGDB: Reaction GIF Database</title>
+    <meta charset="utf-8">
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
+    <!-- compiled JS --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+</head>
+<body id="popup">
+<div ng-if="AppCtrl.loading" ng-animate="'fade'">
+    <div class="loading-screen"><p><span>Loading - Please Wait</span></p></div>
+</div>
+<div class="container" ui-view="app" ng-animate="'fade'"></div>
+</body>
+</html>

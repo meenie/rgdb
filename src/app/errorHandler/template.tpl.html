@@ -1,0 +1,26 @@
+<div class="row-fluid">
+    <div class="span4 offset4">
+        <div class="well well-impressed">
+            <div class="well-header">
+                <h4>Oops! There was an error :(</h4>
+            </div>
+            <div class="well-content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>{{ErrorHandlerCtrl.title}}</h3>
+                        <p>{{ErrorHandlerCtrl.message}}</p>
+                        <pre>{{ErrorHandlerCtrl.details}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-modal">
+            <ul class="nav">
+                <li>
+                    <a ng-click="ErrorHandlerCtrl.goBack()">Go Back</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

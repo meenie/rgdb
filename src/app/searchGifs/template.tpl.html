@@ -1,0 +1,51 @@
+<div class="row gif-search">
+    <div class="col-sm-12 text-center">
+        <form class="form-inline search-gifs" ng-submit="Ctrl.search()">
+            <div class="search-input">
+                <i class="glyphicon glyphicon-remove" ng-click="Ctrl.clearSearch()"
+                   ng-show="Ctrl.searchedGifs.length > 0"></i>
+                <input type="text" ng-model="Ctrl.filterText" class="form-control input-xlarge"
+                       placeholder="Search for Reaction GIF">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+</div>
+<div class="row gif-results" ng-show="Ctrl.searchedGifs.length > 0">
+    <table class="table table-striped">
+        <colgroup>
+            <col class="gif">
+            <col class="keywords">
+            <col class="actions">
+        </colgroup>
+        <tr>
+            <th>GIF</th>
+            <th>Keywords</th>
+            <th>Copy</th>
+        </tr>
+        <tr ng-repeat="gif in Ctrl.searchedGifs">
+            <td class="image">
+                <img preview-gif="gif.url" alt="">
+            </td>
+            <td>
+                <div class="keyword" ng-repeat="keyword in gif.keywords">
+                    <span
+                            ng-click="Ctrl.filterText = keyword; Ctrl.search()"
+                            class="label label-info">
+                    {{keyword}}
+                </span>
+                </div>
+            </td>
+            <td>
+                <div class="input-group">
+                    <input select-text type="text" ng-model="gif.url" class="form-control gif-url-input">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" copy-to-clipboard="gif.url" title="Copy to Clipboard">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </button>
+                        </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

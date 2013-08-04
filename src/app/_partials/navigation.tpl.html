@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h2 class="glyphicon glyphicon-picture"> Reaction GIF Database</h2>
+    </div>
+    <div class="col-sm-12 text-right">
+        <a
+                href="#"
+                ui-goto="mainLayout.addGifs"
+                ng-show="currentState == 'mainLayout.searchGifs'"
+                class="btn btn-small btn-info">
+            <i class="glyphicon glyphicon-plus-sign"></i> Add New GIF
+        </a>
+        <a
+                href="#"
+                ui-goto="mainLayout.searchGifs"
+                ng-show="currentState == 'mainLayout.addGifs'"
+                class="btn btn-small btn-info">
+            <i class="glyphicon glyphicon-search"></i> Search For GIF's
+        </a>
+        <a
+                href="#"
+                ng-click="AppCtrl.popout()"
+                ng-show="AppCtrl.showPopoutButton"
+                class="btn btn-small btn-info">
+            <i class="glyphicon glyphicon-share"></i> Popout RGDB</a>
+    </div>
+</div>
+<hr>

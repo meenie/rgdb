@@ -1,0 +1,7 @@
+*.sw*
+*~
+extension/src/browser_action/
+bin/
+node_modules/
+/vendor/
+.idea/

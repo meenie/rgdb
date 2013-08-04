@@ -1,0 +1,19 @@
+{
+    "rules": {
+        ".read": false,
+        ".write": false,
+        "gifs": {
+            "$gifs": {
+                ".read": true,
+                ".write": true,
+                ".validate": "newData.hasChildren(['keywords', 'url'])",
+                "keywords": {
+                    ".validate": "newData.hasChildren()"
+                },
+                "url": {
+                    ".validate": "newData.isString() && newData.val().endsWith('.gif')"
+                }
+            }
+        }
+    }
+}

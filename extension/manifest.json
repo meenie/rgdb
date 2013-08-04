@@ -1,0 +1,19 @@
+{
+    "name": "RGDB: Reaction GIF Database",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "RGDB is a small extension that helps search reaction GIFs based on keywords.",
+    "homepage_url": "http://github.com/meenie/rgdb",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "default_locale": "en",
+    "browser_action": {
+        "default_icon": "icons/icon19.png",
+        "default_title": "RGDB: Reaction GIF Database",
+        "default_popup": "src/browser_action/index.html"
+    },
+    "content_security_policy": "script-src 'self' https://*.firebaseio.com/; object-src 'self'"
+}
