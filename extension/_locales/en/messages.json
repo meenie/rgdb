@@ -1,0 +1,6 @@
+{
+  "l10nSomeText": {
+    "message":"Foo"
+    ,"description":"Some text that is localized"
+  }
+}
