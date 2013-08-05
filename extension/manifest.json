@@ -1,6 +1,6 @@
 {
     "name": "RGDB: Reaction GIF Database",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "manifest_version": 2,
     "description": "RGDB is a small extension that helps search reaction GIFs based on keywords.",
     "homepage_url": "http://github.com/meenie/rgdb",

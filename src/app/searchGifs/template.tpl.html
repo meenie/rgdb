@@ -34,7 +34,7 @@
         </tr>
         <tr ng-repeat="gif in Ctrl.searchedGifs">
             <td class="image">
-                <img preview-gif="gif.url" alt="">
+                <preview-gif url="gif.url" title="gif.keywords.join(', ') | ucfirst">
             </td>
             <td>
                 <div class="keyword" ng-repeat="keyword in gif.keywords">

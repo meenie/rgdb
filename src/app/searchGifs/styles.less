@@ -1,3 +1,12 @@
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
 .gif-search {
   margin-bottom: 20px;
 }
@@ -32,22 +41,30 @@
 }
 
 .gif-preview {
-  position: relative;
-  width: 174px;
-  text-align: center;
-  cursor: pointer;
+    position: relative;
+    width: 174px;
+    text-align: center;
+    cursor: pointer;
 
-  i {
-    font-size: 6rem;
-    position: absolute;
-    top: 20%;
-    left: 33%;
-    color: whitesmoke;
-  }
+    i {
+        height: 64px;
+        font-size: 6rem;
+        position: absolute;
+        top: 20%;
+        left: 33%;
+        color: whitesmoke;
+    }
+}
+
+.gif-preview.spin i {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 }
 
 .gif-preview.playing i {
-  display: none;
+    display: none;
 }
 
 .search-input {
