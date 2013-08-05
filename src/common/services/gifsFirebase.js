@@ -1,18 +1,35 @@
 angular.module('gifsFirebase', ['firebase', 'LocalStorageModule'])
     .constant('FIREBASE_URL', 'https://rgdb.firebaseio.com/gifs')
-    .factory('gifsFirebase', function ($rootScope, angularFireCollection, FIREBASE_URL, filterFilter) {
-        var gifs = angularFireCollection(FIREBASE_URL);
+    .factory('gifsFirebase', function ($q, angularFireCollection, FIREBASE_URL, filterFilter) {
+        var gifsRef,
+            gifs,
+            init = function() {
+                var deferred = $q.defer();
+                if (! gifsRef) {
+                    gifsRef = angularFireCollection(FIREBASE_URL, function(data) {
+                        gifs = _.toArray(data.val());
+                        deferred.resolve(publicFns);
+                    });
+                } else {
+                    deferred.resolve(publicFns);
+                }
+
+                return deferred.promise;
+            },
+            publicFns = {
+                checkGifExists: function (url) {
+                    return filterFilter(gifs, url).length > 0;
+                },
+                getGifs: function() {
+                    return gifsRef;
+                },
+                addGif: function (data) {
+                    gifsRef.add(data);
+                }
+            };
 
         return {
-            checkGifExists: function(url) {
-                return filterFilter(gifs, url).length > 0;
-            },
-            getGifs: function() {
-                return gifs;
-            },
-            addGif: function(data) {
-                gifs.add(data);
-            }
+            init: init
         };
     })
 ;

@@ -7,6 +7,8 @@ angular.module('commonModules', [
     'endsIn',
     'keywordsRequired',
     'gifsFirebase',
+    'getKeywords',
+    'ucfirst',
     'stateHelper',
     'stateHistory'
 ]);

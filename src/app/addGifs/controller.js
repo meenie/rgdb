@@ -4,13 +4,18 @@ angular.module('rgdb.addGifs', [])
             views: {
                 "main@mainLayout": { // Points to the ui-view="main" in main-layout.tpl.html
                     controller: 'AddGifCtrl as Ctrl',
-                    templateUrl: 'addGifs/template.tpl.html'
+                    templateUrl: 'addGifs/template.tpl.html',
+                    resolve: {
+                        gifs: ['gifsFirebase', function(gifsFirebase) {
+                            return gifsFirebase.init();
+                        }]
+                    }
                 }
             }
         });
     })
 
-    .controller('AddGifCtrl', function($scope, $q, gifsFirebase, localStorageService) {
+    .controller('AddGifCtrl', function($scope, $q, gifs, localStorageService) {
         var Ctrl = this,
             baseGif = {
                 url: '',
@@ -36,7 +41,7 @@ angular.module('rgdb.addGifs', [])
 
         Ctrl.addGif = function() {
             Ctrl.fileExists = true;
-            if (gifsFirebase.checkGifExists($scope.gif.url)) {
+            if (gifs.checkGifExists($scope.gif.url)) {
                 toastr.error('This GIF already exists within the database.', 'Redundancy is Redundant');
 
                 return;
@@ -44,7 +49,7 @@ angular.module('rgdb.addGifs', [])
             var check = checkImageExists($scope.gif.url);
 
             check.then(function() {
-                gifsFirebase.addGif({
+                gifs.addGif({
                     keywords: $scope.gif.keywordsText.split(',').map(function(val) {
                         return val.trim();
                     }),

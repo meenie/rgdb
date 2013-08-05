@@ -9,6 +9,15 @@
             </div>
             <button type="submit" class="btn btn-default">Search</button>
         </form>
+        <div class="keywords-list">
+            <div class="keyword" ng-repeat="keyword in Ctrl.gifs | getKeywords:'keywords' | limitTo:25">
+            <span
+                ng-click="Ctrl.filterText = (keyword | ucfirst); Ctrl.search()"
+                class="label label-info">
+                {{keyword | ucfirst}}
+            </span>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row gif-results" ng-show="Ctrl.searchedGifs.length > 0">
@@ -30,10 +39,10 @@
             <td>
                 <div class="keyword" ng-repeat="keyword in gif.keywords">
                     <span
-                            ng-click="Ctrl.filterText = keyword; Ctrl.search()"
+                            ng-click="Ctrl.filterText = (keyword | ucfirst); Ctrl.search()"
                             class="label label-info">
-                    {{keyword}}
-                </span>
+                        {{keyword | ucfirst}}
+                    </span>
                 </div>
             </td>
             <td>
