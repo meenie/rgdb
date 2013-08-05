@@ -1,5 +1,4 @@
 angular.module('commonModules', [
-    'loadingHandler',
     'ui.goto',
     'copyToClipboard',
     'previewGif',
