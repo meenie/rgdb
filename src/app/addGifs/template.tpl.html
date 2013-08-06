@@ -3,6 +3,12 @@
         <form name="addGif" ng-submit="Ctrl.addGif()" novalidate>
             <fieldset>
                 <legend>Add New GIF</legend>
+                <div class="form-group">
+                    <label class="control-label">Choose Categories</label><br>
+                    <div class="categories">
+                        <button type="button" class="btn btn-primary btn-xs" ng-repeat="category in Ctrl.categories" ng-model="gif.categories[$index]" btn-checkbox>{{category}}</button>
+                    </div>
+                </div>
                 <div class="form-group" ng-class="{'has-error': addGif.url.$error.url || addGif.url.$error.endsIn || ! Ctrl.fileExists}">
                     <label for="inputUrl" class="control-label">URL</label>
                     <input type="text" name="url" ng-model="gif.url" class="form-control" id="inputUrl" placeholder="URL" ends-in=".gif" required>

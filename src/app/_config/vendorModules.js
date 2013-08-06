@@ -1,5 +1,6 @@
 angular.module('vendorModules', [
     'ui.state',
     'firebase',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'ui.bootstrap.buttons'
 ]);

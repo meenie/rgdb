@@ -12,7 +12,8 @@
     "toastr": "1.3.0",
     "lodash": "~1.3.1",
     "angular-fire": "~0.2.0",
-    "bootstrap-glyphicons": "gh-pages"
+    "bootstrap-glyphicons": "gh-pages",
+    "angular-ui-bootstrap": "https://github.com/hall5714/angular-ui-bootstrap.git#bootstrap3"
   },
   "dependencies": {}
 }

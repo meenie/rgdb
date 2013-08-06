@@ -19,7 +19,9 @@ angular.module('rgdb', [
         var Ctrl = this;
 
         Ctrl.popout = function() {
-            window.open(chrome.extension.getURL("src/browser_action/index.html?popped-out=true"),"gc-popout-window","width=815,height=654");
+            var w = window.open(chrome.extension.getURL("src/browser_action/index.html?popped-out=true"),"gc-popout-window","width=815,height=654");
+            window.close();
+            w.focus();
         };
 
         Ctrl.showPopoutButton = ! $location.search()['popped-out'];

@@ -57,6 +57,7 @@ module.exports = {
             'vendor/lodash/dist/lodash.min.js',
             'vendor/toastr/toastr.min.js',
             'vendor/angular-fire/angularfire.min.js',
+            'vendor/angular-ui-bootstrap/src/buttons/buttons.js',
             'local_vendor/localStorageModule/localStorageModule.js'
         ],
         css: [
