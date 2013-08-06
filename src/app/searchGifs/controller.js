@@ -15,17 +15,19 @@ angular.module('rgdb.searchGifs', [])
         });
     })
 
-    .controller('SearchCtrl', function($timeout, gifs, filterFilter){
+    .controller('SearchCtrl', function($timeout, gifs, filterFilter, localStorageService){
         var Ctrl = this;
 
         Ctrl.gifs = gifs.getGifs();
 
-        Ctrl.searchedGifs = [];
         Ctrl.search = function() {
             if (Ctrl.filterText) {
                 Ctrl.searchedGifs = filterFilter(gifs.getGifs(), Ctrl.filterText);
                 if (Ctrl.searchedGifs.length === 0) {
+                    localStorageService.remove('filterText');
                     toastr.info('Your search did not produce any results.', 'No Results :(');
+                } else {
+                    localStorageService.add('filterText', Ctrl.filterText);
                 }
             } else {
                 toastr.info('Please enter a keyword to search.', 'Oops!');
@@ -35,6 +37,14 @@ angular.module('rgdb.searchGifs', [])
         Ctrl.clearSearch = function() {
             Ctrl.searchedGifs = [];
             Ctrl.filterText = '';
+            localStorageService.remove('filterText');
         };
+
+        Ctrl.searchedGifs = [];
+        Ctrl.filterText = localStorageService.get('filterText');
+
+        if (Ctrl.filterText) {
+            Ctrl.search();
+        }
     })
 ;
