@@ -51,21 +51,27 @@ module.exports = {
         js: [
             'vendor/jquery/jquery.min.js',
             'local_vendor/firebase/firebase.js',
+            'vendor/select2/select2.min.js',
+            'vendor/lodash/dist/lodash.min.js',
+            'vendor/toastr/toastr.min.js',
             'vendor/angular-unstable/angular.min.js',
             'vendor/angular-ui-utils/modules/event/event.js',
             'vendor/angular-ui-router/release/angular-ui-router.min.js',
-            'vendor/lodash/dist/lodash.min.js',
-            'vendor/toastr/toastr.min.js',
+            'vendor/angular-ui-select2/src/select2.js',
             'vendor/angular-fire/angularfire.min.js',
             'vendor/angular-ui-bootstrap/src/buttons/buttons.js',
             'local_vendor/localStorageModule/localStorageModule.js'
         ],
         css: [
             'vendor/toastr/toastr.css',
-            'vendor/bootstrap-glyphicons/css/bootstrap-glyphicons.css'
+            'vendor/bootstrap-glyphicons/css/bootstrap-glyphicons.css',
+            'vendor/select2/select2.css'
         ],
         files: [
-            'vendor/bootstrap-glyphicons/fonts/**'
+            'vendor/bootstrap-glyphicons/fonts/**',
+            'vendor/select2/select2.png',
+            'vendor/select2/select2-spinner.gif',
+            'vendor/select2/select2x2.png'
         ]
     }
 };

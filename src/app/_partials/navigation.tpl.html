@@ -2,20 +2,36 @@
     <div class="col-sm-12 text-center">
         <h2 class="glyphicon glyphicon-picture"> Reaction GIF Database</h2>
     </div>
-    <div class="col-sm-12 text-right">
+    <div class="col-sm-6 text-left">
         <a
                 href="#"
-                ui-goto="mainLayout.addGifs"
-                ng-show="currentState == 'mainLayout.searchGifs'"
-                class="btn btn-small btn-info">
-            <i class="glyphicon glyphicon-plus-sign"></i> Add New GIF
+                ui-goto="mainLayout.searchGifsByKeywords"
+                ng-show="currentState == 'mainLayout.searchGifsByCategories'"
+                class="btn btn-small btn-success">
+            <i class="glyphicon glyphicon-search"></i> Search By Keywords
         </a>
         <a
                 href="#"
-                ui-goto="mainLayout.searchGifs"
+                ui-goto="mainLayout.searchGifsByCategories"
+                ng-show="currentState == 'mainLayout.searchGifsByKeywords'"
+                class="btn btn-small btn-success">
+            <i class="glyphicon glyphicon-search"></i> Search By Categories
+        </a>
+    </div>
+    <div class="col-sm-6 text-right">
+        <a
+                href="#"
+                ui-goto="mainLayout.addGifs"
+                ng-show="currentState == 'mainLayout.searchGifsByKeywords' || currentState == 'mainLayout.searchGifsByCategories'"
+                class="btn btn-small btn-info">
+            <i class="glyphicon glyphicon-plus-search"></i> Add New GIF
+        </a>
+        <a
+                href="#"
+                ui-goto="{{defaultSearchState}}"
                 ng-show="currentState == 'mainLayout.addGifs'"
                 class="btn btn-small btn-info">
-            <i class="glyphicon glyphicon-search"></i> Search For GIF's
+            <i class="glyphicon glyphicon-search"></i> Search For GIFs
         </a>
         <a
                 href="#"

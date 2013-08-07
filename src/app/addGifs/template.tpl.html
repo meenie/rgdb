@@ -3,23 +3,38 @@
         <form name="addGif" ng-submit="Ctrl.addGif()" novalidate>
             <fieldset>
                 <legend>Add New GIF</legend>
-                <div class="form-group">
-                    <label class="control-label">Choose Categories</label><br>
-                    <div class="categories">
-                        <button type="button" class="btn btn-primary btn-xs" ng-repeat="category in Ctrl.categories" ng-model="gif.categories[$index]" btn-checkbox>{{category}}</button>
-                    </div>
-                </div>
-                <div class="form-group" ng-class="{'has-error': addGif.url.$error.url || addGif.url.$error.endsIn || ! Ctrl.fileExists}">
+                <div class="form-group" ng-class="{'has-error': ! Ctrl.fileExists}">
                     <label for="inputUrl" class="control-label">URL</label>
                     <input type="text" name="url" ng-model="gif.url" class="form-control" id="inputUrl" placeholder="URL" ends-in=".gif" required>
                     <span class="help-block" ng-show="addGif.url.$error.url || addGif.url.$error.endsIn">Must be a valid URL with a .gif extension</span>
                 </div>
-                <div class="form-group" ng-class="{'has-error': addGif.keywords.$error.keywordsRequired}">
+                <div class="form-group">
+                    <label class="control-label" for="inputCategories">Category</label>
+                    <select
+                            class="select2-control"
+                            id="inputCategories"
+                            multiple
+                            ui-select2="Ctrl.categoriesSelect2"
+                            name="categories"
+                            ng-model="gif.categories"
+                            tags-required="1"
+                            required>
+                        <option ng-repeat="category in Ctrl.categories">{{category}}</option>
+                    </select>
+                    <span class="help-block" ng-show="addGif.categories.$error.tagsRequired">You must pick at least 1 category.</span>
+                </div>
+                <div class="form-group">
                     <label for="inputKeywords" class="control-label">Keywords</label>
-                    <input type="text" name="keywords" ng-model="gif.keywordsText" class="form-control" id="inputKeywords"
-                           placeholder="Keywords" required keywords-required="3">
-                    <span class="help-block">Separate each keyword with a comma (,).</span>
-                    <span class="help-block" ng-show="addGif.keywords.$error.keywordsRequired">You must submit at least 3 keywords.</span>
+                    <input
+                            class="select2-control"
+                            id="inputKeywords"
+                            type="text"
+                            ui-select2="Ctrl.keywordsSelect2"
+                            name="keywords"
+                            ng-model="gif.keywords"
+                            required
+                            tags-required="3">
+                    <span class="help-block" ng-show="addGif.keywords.$error.tagsRequired">You must submit at least 3 keywords.</span>
                 </div>
                 <button type="submit" class="btn btn-default" ng-disabled="addGif.$invalid">Add GIF</button>
             </fieldset>

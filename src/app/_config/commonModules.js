@@ -4,10 +4,11 @@ angular.module('commonModules', [
     'previewGif',
     'selectText',
     'endsIn',
-    'keywordsRequired',
+    'tagsRequired',
     'gifsFirebase',
     'getKeywords',
     'ucfirst',
+    'gifCategories',
     'stateHelper',
     'stateHistory'
 ]);

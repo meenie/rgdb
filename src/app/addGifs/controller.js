@@ -15,7 +15,7 @@ angular.module('rgdb.addGifs', [])
         });
     })
 
-    .controller('AddGifCtrl', function($scope, $q, gifs, localStorageService) {
+    .controller('AddGifCtrl', function($scope, $q, gifs, localStorageService, getKeywordsFilter, gifCategories) {
         var Ctrl = this,
             baseGif = {
                 url: '',
@@ -38,35 +38,7 @@ angular.module('rgdb.addGifs', [])
                 return deferred.promise;
             };
 
-        Ctrl.categories = [
-            'Disgust/Abort Thread', 'Amazed/Excited/Nailed it', 'Clapping', 'Sad/Upset/Angry', 'Agreement/Not Bad',
-            'Popcorn/Dis Gun B Gud', 'Haters Gonna Hate', 'Didn\'t Read lol', 'Mind Blown', 'Upvotes',
-            'Controversial (Upvote/Downvote)', 'Downvotes', 'Wut/Confused', 'Faking Interest/Cool Story Bro', 'Dancing',
-            'Fuck You/U Mad Bro?', 'OP is a faggot', 'Deal With It', 'Not Giving A Fuck', 'Erections/Fapping',
-            'Laughing', 'Self-Inflected', 'Cats/Pets/Animals', 'Obama', 'Children Demolition', 'Party Hard/Swag',
-            'Fighting/Minor-Injury/Pranks/Slaps', '[NSFW] Boobs and Asses', 'Sports', 'Nigel Thornberry', 'Racist',
-            'Feels/NoUpsetJimmies', 'Skill', 'Doctor Who', 'Community', 'Star Trek', 'Adventure Time', 'MLP',
-            'Spongebob Squarepants', 'Thanks, Obama'
-        ].sort();
-        Ctrl.categories.push('Miscellaneous');
-        Ctrl.fileExists = true;
-
         Ctrl.addGif = function() {
-            Ctrl.fileExists = true;
-            var categories = _.keys(_.pick($scope.gif.categories, function(value) {
-                return value;
-            }));
-
-            categories = _.map(categories, function(val) {
-                return Ctrl.categories[val];
-            });
-
-            if (categories.length === 0) {
-                toastr.error('Please select at least one category');
-
-                return;
-            }
-
             if (gifs.checkGifExists($scope.gif.url)) {
                 toastr.error('This GIF already exists within the database.', 'Redundancy is Redundant');
 
@@ -75,20 +47,37 @@ angular.module('rgdb.addGifs', [])
             var check = checkImageExists($scope.gif.url);
 
             check.then(function() {
-                gifs.addGif({
-                    keywords: $scope.gif.keywordsText.split(',').map(function(val) {
-                        return val.trim();
-                    }),
-                    url: $scope.gif.url,
-                    categories: categories
+                // Fix selec2 items object to just an array of strings
+                $scope.gif.keywords = _.map($scope.gif.keywords, function(item) {
+                    return item.text;
                 });
+
+                gifs.addGif($scope.gif);
                 $scope.gif = angular.copy(baseGif);
+                // Update tags list if needed
+                Ctrl.keywordsSelect2.tags = getKeywordsFilter(gifs.getGifs(), false);
                 toastr.success('GIF has been added to the database!', 'Success!');
             }, function() {
                 Ctrl.fileExists = false;
                 toastr.error('Sorry, that URL does not exist. Please check and try again', 'Ruh Roh!');
             });
         };
+
+        Ctrl.categories = gifCategories;
+
+        Ctrl.categoriesSelect2 = {
+            placeholder: 'Select one or multiple categories',
+            width: 'resolve'
+        };
+
+        Ctrl.keywordsSelect2 = {
+            placeholder: 'Select add at least 3 keywords',
+            width: 'resolve',
+            multiple: true,
+            tags: getKeywordsFilter(gifs.getGifs(), false)
+        };
+
+        Ctrl.fileExists = true;
 
         $scope.gif = {};
 
@@ -97,18 +86,18 @@ angular.module('rgdb.addGifs', [])
             localStorageService.add('gifUrl', val);
         });
 
-        $scope.$watch('gif.keywordsText', function(val) {
-            val = val == null ? '' : val;
-            localStorageService.add('gifKeywordsText', val);
+        $scope.$watch('gif.keywords', function(val) {
+            val = val == null ? [] : val;
+            localStorageService.add('gifKeywords', val);
         });
 
         $scope.$watch('gif.categories', function(val) {
-            val = val == null ? {} : val;
+            val = val == null ? [] : val;
             localStorageService.add('gifCategories', val);
         }, true);
 
         $scope.gif.url = localStorageService.get('gifUrl') !== null ? localStorageService.get('gifUrl') : '';
-        $scope.gif.keywordsText = localStorageService.get('gifKeywordsText') !== null ? localStorageService.get('gifKeywordsText') : '';
-        $scope.gif.categories = localStorageService.get('gifCategories') !== null ? localStorageService.get('gifCategories') : {};
+        $scope.gif.keywords = localStorageService.get('gifKeywords') !== null ? localStorageService.get('gifKeywords') : [];
+        $scope.gif.categories = localStorageService.get('gifCategories') !== null ? localStorageService.get('gifCategories') : [];
     })
 ;

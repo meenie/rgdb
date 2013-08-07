@@ -1,10 +1,24 @@
 angular.module('rgdb.searchGifs', [])
     .config(function(stateHelperProvider) {
-        stateHelperProvider.addState('mainLayout.searchGifs', {
+        stateHelperProvider.addState('mainLayout.searchGifsByKeywords', {
             views: {
                 "main@mainLayout": { // Points to the ui-view="main" in main-layout.tpl.html
                     controller: 'SearchCtrl as Ctrl',
-                    templateUrl: 'searchGifs/template.tpl.html',
+                    templateUrl: 'searchGifs/by-keywords.tpl.html',
+                    resolve: {
+                        gifs: ['gifsFirebase', function(gifsFirebase) {
+                            return gifsFirebase.init();
+                        }]
+                    }
+                }
+            }
+        });
+
+        stateHelperProvider.addState('mainLayout.searchGifsByCategories', {
+            views: {
+                "main@mainLayout": { // Points to the ui-view="main" in main-layout.tpl.html
+                    controller: 'SearchCtrl as Ctrl',
+                    templateUrl: 'searchGifs/by-categories.tpl.html',
                     resolve: {
                         gifs: ['gifsFirebase', function(gifsFirebase) {
                             return gifsFirebase.init();
@@ -15,10 +29,8 @@ angular.module('rgdb.searchGifs', [])
         });
     })
 
-    .controller('SearchCtrl', function($timeout, gifs, filterFilter, localStorageService){
+    .controller('SearchCtrl', function($timeout, gifs, filterFilter, localStorageService, gifCategories){
         var Ctrl = this;
-
-        Ctrl.gifs = gifs.getGifs();
 
         Ctrl.search = function() {
             if (Ctrl.filterText) {
@@ -40,6 +52,8 @@ angular.module('rgdb.searchGifs', [])
             localStorageService.remove('filterText');
         };
 
+        Ctrl.gifs = gifs.getGifs();
+        Ctrl.categories = gifCategories;
         Ctrl.searchedGifs = [];
         Ctrl.filterText = localStorageService.get('filterText');
 

@@ -10,13 +10,17 @@
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
-            <div class="keywords-list">
-                <div class="keyword" ng-repeat="keyword in Ctrl.gifs | getKeywords:'keywords' | limitTo:25">
+            <div class="keywords-list" ng-init="showAll = true; top5 = false; limit = 5;">
+                <div class="keyword" ng-repeat="keyword in Ctrl.gifs | getKeywords:'keywords' | limitTo: limit">
                     <span
-                        ng-click="Ctrl.filterText = (keyword | ucfirst); Ctrl.search()"
-                        class="label label-info">
-                        {{keyword | ucfirst}}
+                            ng-click="Ctrl.filterText = (keyword | ucfirst); Ctrl.search()"
+                            class="label label-info">
+                        {{keyword}}
                     </span>
+                </div>
+                <div class="keyword">
+                    <span class="label" ng-show="showAll" ng-click="limit = 1000; showAll = false; top5 = true;">Show All...</span>
+                    <span class="label" ng-show="top5" ng-click="limit = 5; top5 = false; showAll = true;">Top 5...</span>
                 </div>
             </div>
         </div>
@@ -35,14 +39,14 @@
             </tr>
             <tr ng-repeat="gif in Ctrl.searchedGifs">
                 <td class="image">
-                    <preview-gif url="gif.url" title="gif.keywords.join(', ') | ucfirst">
+                    <preview-gif url="gif.url" title="gif.keywords.join(', ') | ucfirst"></preview-gif>
                 </td>
                 <td>
                     <div class="keyword" ng-repeat="keyword in gif.keywords">
                         <span
                             ng-click="Ctrl.filterText = (keyword | ucfirst); Ctrl.search()"
                             class="label label-info">
-                            {{keyword | ucfirst}}
+                            {{keyword}}
                         </span>
                     </div>
                 </td>

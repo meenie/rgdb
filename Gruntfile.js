@@ -285,6 +285,10 @@ module.exports = function (grunt) {
                         {
                             pattern: /\.\.\/fonts\/glyphiconshalflings/g,
                             replacement: 'vendor/bootstrap-glyphicons/fonts/glyphiconshalflings'
+                        },
+                        {
+                            pattern: /select2(\.png|-spinner\.gif|x2\.png)/g,
+                            replacement: 'vendor/select2/select2$1'
                         }
                     ]
                 }

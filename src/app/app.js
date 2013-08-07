@@ -26,10 +26,6 @@ angular.module('rgdb', [
 
         Ctrl.showPopoutButton = ! $location.search()['popped-out'];
 
-        $scope.$on('loadingHandler.loading', function(event, loading) {
-            Ctrl.loading = loading;
-        });
-
         var onTimer,
             offTimer;
         $scope.$on('$stateChangeStart', function() {
@@ -53,15 +49,22 @@ angular.module('rgdb', [
         });
 
         if (! localStorageService.get('init')) {
-            localStorageService.add('defaultState', 'mainLayout.searchGifs');
+            localStorageService.add('defaultState', 'mainLayout.searchGifsByKeywords');
+            localStorageService.add('defaultSearchState', 'mainLayout.searchGifsByKeywords');
             localStorageService.add('init', true);
         }
 
         $scope.$on('$stateChangeSuccess', function(event, toState){
             localStorageService.add('defaultState', toState.name);
             $scope.currentState = toState.name;
+            if (toState.name.substr(0, 21) == 'mainLayout.searchGifs') {
+                localStorageService.add('defaultSearchState', toState.name);
+                $scope.defaultSearchState = toState.name;
+            }
         });
 
         $state.transitionTo(localStorageService.get('defaultState'));
+        $scope.currentState = localStorageService.get('defaultState');
+        $scope.defaultSearchState = localStorageService.get('defaultSearchState');
     })
 ;
