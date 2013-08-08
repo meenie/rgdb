@@ -19,7 +19,7 @@
                             ng-model="gif.categories"
                             tags-required="1"
                             required>
-                        <option ng-repeat="category in Ctrl.categories">{{category}}</option>
+                        <option ng-repeat="category in Ctrl.categories">{{category.name}}</option>
                     </select>
                     <span class="help-block" ng-show="addGif.categories.$error.tagsRequired">You must pick at least 1 category.</span>
                 </div>
@@ -33,8 +33,8 @@
                             name="keywords"
                             ng-model="gif.keywords"
                             required
-                            tags-required="3">
-                    <span class="help-block" ng-show="addGif.keywords.$error.tagsRequired">You must submit at least 3 keywords.</span>
+                            tags-required="2">
+                    <span class="help-block" ng-show="addGif.keywords.$error.tagsRequired">You must submit at least 2 keywords.</span>
                 </div>
                 <button type="submit" class="btn btn-default" ng-disabled="addGif.$invalid">Add GIF</button>
             </fieldset>

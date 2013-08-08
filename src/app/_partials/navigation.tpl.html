@@ -5,15 +5,15 @@
     <div class="col-sm-6 text-left">
         <a
                 href="#"
-                ui-goto="mainLayout.searchGifsByKeywords"
-                ng-show="currentState == 'mainLayout.searchGifsByCategories'"
+                ui-goto="mainLayout.searchGifsByKeyword"
+                ng-show="currentState == 'mainLayout.searchGifsByCategory'"
                 class="btn btn-small btn-success">
             <i class="glyphicon glyphicon-search"></i> Search By Keywords
         </a>
         <a
                 href="#"
-                ui-goto="mainLayout.searchGifsByCategories"
-                ng-show="currentState == 'mainLayout.searchGifsByKeywords'"
+                ui-goto="mainLayout.searchGifsByCategory"
+                ng-show="currentState == 'mainLayout.searchGifsByKeyword'"
                 class="btn btn-small btn-success">
             <i class="glyphicon glyphicon-search"></i> Search By Categories
         </a>
@@ -22,9 +22,9 @@
         <a
                 href="#"
                 ui-goto="mainLayout.addGifs"
-                ng-show="currentState == 'mainLayout.searchGifsByKeywords' || currentState == 'mainLayout.searchGifsByCategories'"
+                ng-show="currentState == 'mainLayout.searchGifsByKeyword' || currentState == 'mainLayout.searchGifsByCategory'"
                 class="btn btn-small btn-info">
-            <i class="glyphicon glyphicon-plus-search"></i> Add New GIF
+            <i class="glyphicon glyphicon-plus"></i> Add New GIF
         </a>
         <a
                 href="#"

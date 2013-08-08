@@ -1,0 +1,77 @@
+<div class="gif-search-wrapper">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h3>Browse By Category</h3>
+        </div>
+    </div>
+    <div class="categories-list" ng-show="Ctrl.categoryGifs.length === 0">
+        <div class="row gif-search">
+            <div class="col-sm-12 text-center">
+                <form class="form-inline search-gifs">
+                    <div class="search-input">
+                        <i class="glyphicon glyphicon-remove" ng-click="categoryFilter = null"
+                            ng-show="categoryFilter"></i>
+                        <input type="text" ng-model="categoryFilter" class="form-control input-xlarge"
+                            placeholder="Filter Categories">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="category-wrapper col-sm-3" ng-repeat="category in Ctrl.categories | filter:categoryFilter">
+                    <div
+                        class="category"
+                        ng-click="Ctrl.filterCategoryGifs(category.name)">
+                        <h5>{{category.name}}</h5>
+                        <div class="image-wrapper">
+                            <img ng-src="{{category.imgUrl}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row gif-results" ng-show="Ctrl.categoryGifs.length > 0">
+        <h4 class="text-center">
+            {{Ctrl.categoryFilter}}
+        </h4>
+        <button class="btn btn-small pull-right go-back" ng-click="Ctrl.clearCategoryFilter()"><i class="glyphicon glyphicon-arrow-left"></i> Go Back</button>
+        <table class="table table-striped">
+            <colgroup>
+                <col class="gif">
+                <col class="keywords">
+                <col class="actions">
+            </colgroup>
+            <tr>
+                <th>GIF</th>
+                <th>Categories</th>
+                <th>Copy</th>
+            </tr>
+            <tr ng-repeat="gif in Ctrl.categoryGifs">
+                <td class="image">
+                    <preview-gif url="gif.url" title="gif.categories.join(', ')"></preview-gif>
+                </td>
+                <td>
+                    <div class="keyword" ng-repeat="category in gif.categories">
+                        <span
+                            ng-click="Ctrl.filterCategoryGifs(category)"
+                            class="label label-info">
+                            {{category}}
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input select-text type="text" ng-model="gif.url" class="form-control gif-url-input">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" copy-to-clipboard="gif.url" title="Copy to Clipboard">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -49,8 +49,8 @@ angular.module('rgdb', [
         });
 
         if (! localStorageService.get('init')) {
-            localStorageService.add('defaultState', 'mainLayout.searchGifsByKeywords');
-            localStorageService.add('defaultSearchState', 'mainLayout.searchGifsByKeywords');
+            localStorageService.add('defaultState', 'mainLayout.searchGifsByKeyword');
+            localStorageService.add('defaultSearchState', 'mainLayout.searchGifsByKeyword');
             localStorageService.add('init', true);
         }
 
