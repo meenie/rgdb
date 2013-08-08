@@ -9,10 +9,18 @@ angular.module('rgdb', [
         // State Manager
         'stateManager'
     ])
-    .run(function run() {
+    .constant('CURRENT_VERSION', '0.0.4')
+    .run(function run(localStorageService, CURRENT_VERSION) {
         toastr.options = {
             "positionClass": "toast-top-left"
         };
+
+        var version = localStorageService.get('version');
+
+        if (! version || version !== CURRENT_VERSION) {
+            localStorageService.clearAll();
+            localStorageService.add('version', CURRENT_VERSION);
+        }
     })
 
     .controller('AppCtrl', function($timeout, $scope, localStorageService, $state, $location) {

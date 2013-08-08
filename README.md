@@ -4,6 +4,8 @@
 
 ***
 
+### [Download Extension Here](https://chrome.google.com/webstore/detail/rgdb-reaction-gif-databas/imnmfplnjbokfdfjccabigmiffjepndo)
+
 ### This project is built on:
 * AngularJS (http://angularjs.org/)
 * ng-boilerplate (http://joshdmiller.github.com/ng-boilerplate)

@@ -71,7 +71,7 @@ angular.module('rgdb.addGifs', [])
         };
 
         Ctrl.keywordsSelect2 = {
-            placeholder: 'Select add at least 3 keywords',
+            placeholder: 'Select add at least 2 keywords',
             width: 'resolve',
             multiple: true,
             tags: getKeywordsFilter(gifs.getGifs(), false)
